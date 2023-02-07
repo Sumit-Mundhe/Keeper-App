@@ -25,6 +25,8 @@ function App(){
         <div className='main'>
             <Header />
             <InputArea onAdd={addNote}/>
+            <div className="notes-list">
+
             {
                 notes.map((noteItem,index) =>{
                     return <Note 
@@ -36,6 +38,7 @@ function App(){
                     />
                 })
             }
+            </div>
             <Footer/>
         </div>
     )
