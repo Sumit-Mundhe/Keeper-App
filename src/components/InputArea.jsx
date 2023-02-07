@@ -1,4 +1,7 @@
 import React,{useState} from 'react'
+import AddIcon from '@mui/icons-material/Add';
+import Fab from '@mui/material/Fab';
+import Zoom from '@mui/material/Zoom';
 
 function InputArea(props){
     const[note,setNote] = useState({
@@ -29,14 +32,15 @@ function InputArea(props){
     }
 
     return(
-        <div className="input-area">
-            <form>
+        <div className="input-area-main">
+            <form className="input-area">
                 <input 
                     name="title"
                     value={note.title}
                     onChange={update}
                     type="text" 
                     placeholder='Title'
+                    spellCheck="false"
                 ></input>
                 <textarea 
                     name="content"
@@ -45,10 +49,14 @@ function InputArea(props){
                     type="text" 
                     placeholder='Content'
                     rows="3"
+                    spellCheck="false"
                 ></textarea>
-                <button
-                    onClick={submitNote}
-                > Add</button>
+                <Zoom in='true' >
+                    <Fab className='add'
+                        onClick={submitNote}
+                    > <AddIcon fontSize='large' />
+                    </Fab>
+                </Zoom>
             </form>
         </div>
     )
