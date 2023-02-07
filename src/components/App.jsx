@@ -1,23 +1,41 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React, {useState} from 'react'
 import Header from './Header';
 import Footer from './Footer';
 import Note from './Note';
-import notes from '../notes';
+import InputArea from './InputArea';
 
 function App(){
+    const[notes,setNotes] = useState([])
+
+    function addNote(newNote){
+        setNotes(prevnotes =>{
+            return [...prevnotes,newNote]
+        })
+    }
+
+    function deleteNote(id){
+        setNotes(prevnotes =>{
+            return prevnotes.filter((noteItem,index)=>{
+                return index!==id
+            })
+        })
+    }
+
     return(
-        <div>
+        <div className='main'>
             <Header />
-            <div className="notes-main">
-                {notes.map(obj => (
-                    <Note 
-                    key={obj.id}
-                    title={obj.title}
-                    ds={obj.ds}
+            <InputArea onAdd={addNote}/>
+            {
+                notes.map((noteItem,index) =>{
+                    return <Note 
+                    key={index}
+                    id={index}
+                    title={noteItem.title}
+                    content={noteItem.content}
+                    onDelete={deleteNote}
                     />
-                ))}
-            </div>
+                })
+            }
             <Footer/>
         </div>
     )
